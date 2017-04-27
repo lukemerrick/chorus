@@ -9,14 +9,21 @@ def silence(length, rate=44100):
   '''
   return numpy.zeros(int(length * rate))
 
+#def generate_wave_input_old(freq, length, rate=44100, phase=0.0):
+#  ''' Used by waveform generators to create frequency-scaled input array
+#  '''
+#  length = int(length * rate)
+#  phase *= float(rate) / 2
+#  factor = float(freq) * (math.pi * 2) / rate
+#  return (numpy.arange(length) + phase) * factor
 
 def generate_wave_input(freq, length, rate=44100, phase=0.0):
   ''' Used by waveform generators to create frequency-scaled input array
   '''
   length = int(length * rate)
-  phase *= float(rate) / 2
   factor = float(freq) * (math.pi * 2) / rate
-  return (numpy.arange(length) + phase) * factor
+  return numpy.arange(length) * factor + (phase * math.pi * 2)
+
 
 
 def sine(freq, length, rate=44100, phase=0.0):
